@@ -1,8 +1,37 @@
-<h1> <%= @list.name %></h1>
+<div class="p-3 mb-2 bg-info text-white">
+        <div class="d-flex">
+        <h1 class="m-2"><%= @list.name  %></h1>
+        </div>
+        <hr>
+        <div class="container">
+        <div class="row">
+          <hr>
+              <% @list.bookmarks.each do |bookmark| %>
+          <div class="col-6 d-flex my-4">
 
-<div class= container></div>
-<% @bookmarks.each do |bookmark| %>
-<div class="card"><%= bookmark %></div>
-<% end %>
-<%= link_to 'My lists', lists_path %>
-<%= link_to 'Add a movie', new_list_bookmark_path(@list) %>
+            <div><% url = "https://image.tmdb.org/t/p/w1#{bookmark.movie.poster_url}"%>
+              <%= image_tag url, alt:"poster", width: "300px" %>
+            </div>
+          <hr>
+            <div class="px-2 ">
+                <p><strong><%= bookmark.comment %></strong></p>
+                <h4 class="card-title font-weight-bold"><%= bookmark.movie.title %></h4>
+                <h6 class="card_text"><%= bookmark.movie.overview %></h6>
+                <h6><strong><%= "Rating:"%></strong></h6>
+                <hr>
+                <h6><%= "#{bookmark.movie.rating}" %></h6>
+                <%= link_to bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } do %>
+                <strong><i class="far fa-trash-alt" height= 100px></i></strong>
+                <% end %>
+                <hr>
+            </div>
+          </div>
+          <hr>
+            <% end %>
+        </div>
+        <hr>
+    </div>
+
+        <p class="btn btn-info"><%= link_to 'Add Movie', new_list_bookmark_path(@list) %></p>
+        <p><%= link_to "Back", lists_path(), class: "btn btn-outline-info" %></p>
+</div>
