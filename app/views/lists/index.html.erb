@@ -3,6 +3,8 @@
 <% @lists.each do |list| %>
 <div class="card"><%= link_to list.name, list_path(list) %></div>
 <% end %>
+<%= cl_image_tag("Screenshot_2021-10-24_225757_dlwxcd",
+      width: 400, height: 300, crop: :fill) %>
 </div>
 
 <%= link_to 'New list', new_list_path %>
